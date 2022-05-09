@@ -16,6 +16,8 @@ namespace DashBoardDAL.Config
             builder.ToTable(nameof(TeamEntity));
             builder.HasKey(t => t.Id).HasName("PK_Team ");  
             builder.Property(t => t.Name);
+
+            builder.HasMany<UserEntity>(p => p.TeamUsers).WithMany(g => g.Teams);
             
         }
     }

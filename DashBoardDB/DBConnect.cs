@@ -23,7 +23,8 @@ namespace DashBoardDAL
 
         public DBConnect()
         {
-            this._constr = @"Data Source=RAPH;Initial Catalog=Db_DashBoard;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            this._constr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Db_DashBoard;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            //this._constr = @"Data Source=RAPH;Initial Catalog=Db_DashBoard;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
         public DBConnect(string connectionString):base()
         {
