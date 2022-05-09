@@ -9,32 +9,76 @@ namespace DashBoardDAL.Repositories
 {
     internal class TeamRepository : IRepository<TeamEntity>
     {
-        public bool Create()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Create(string name)
         {
+            TeamEntity tm = new TeamEntity();
 
-
+            tm.Name = name;
+            tm.TeamUsers = new List<UserEntity>();
 
             return true;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            using (DBConnect db = new DBConnect())
+            {
+                var g = db.team.Where(x => x.Id == id).FirstOrDefault();
 
+                if (g is TeamEntity)
+                    db.Remove(g);
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<TeamEntity> GetAll()
         {
-            throw new NotImplementedException();
+            List<TeamEntity> t = new List<TeamEntity>();
+            using(DBConnect db = new DBConnect())
+            {
+                t = db.team.AsQueryable().ToList();
+            }
+            return t;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public TeamEntity GetOne(int id)
         {
-            throw new NotImplementedException();
-        }
+            TeamEntity m = new TeamEntity();
+            using (DBConnect db = new DBConnect())
+            {
+                m = db.team.Where(p => p.Id == id).FirstOrDefault();
 
-        public bool Update(int id)
+                return m;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Update(TeamEntity entity)
         {
-            throw new NotImplementedException();
+            using(DBConnect db = new DBConnect())
+            {
+                db.team.Update(entity);
+                return true;
+            }
         }
     }
 }
