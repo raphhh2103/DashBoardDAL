@@ -12,7 +12,7 @@ namespace DashBoardDAL.Repositories
 
         bool Update(int id);
 
-        bool Create(int id);
+        //bool Create();
 
 
         T GetOne(int id);

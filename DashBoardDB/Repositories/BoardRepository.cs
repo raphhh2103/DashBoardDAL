@@ -9,7 +9,7 @@ namespace DashBoardDAL.Repositories
 {
     internal class BoardRepository : IRepository<BoardEntity>
     {
-        public bool Create(int id)
+        public bool Create()
         {
             throw new NotImplementedException();
         }

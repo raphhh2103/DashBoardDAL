@@ -9,9 +9,12 @@ namespace DashBoardDAL.Repositories
 {
     internal class TeamRepository : IRepository<TeamEntity>
     {
-        public bool Create(int id)
+        public bool Create()
         {
-            throw new NotImplementedException();
+
+
+
+            return true;
         }
 
         public bool Delete(int id)

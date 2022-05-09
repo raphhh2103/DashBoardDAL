@@ -44,6 +44,8 @@ namespace DashBoardDAL
             modelBuilder.ApplyConfiguration(new BoardConfig());
             modelBuilder.ApplyConfiguration(new UserEntityConfig());
             modelBuilder.ApplyConfiguration(new ContentConfig());
+            modelBuilder.ApplyConfiguration(new TeamConfig());
+            modelBuilder.ApplyConfiguration(new ProjectConfig());
 
 
             base.OnModelCreating(modelBuilder);

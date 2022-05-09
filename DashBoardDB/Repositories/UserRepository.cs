@@ -9,10 +9,18 @@ namespace DashBoardDAL.Repositories
 {
     public class UserRepository : IRepository<UserEntity>
     {
-        public bool Create(int id)
+        public bool Create(string mail,string pseudo, string pass)
         {
-            throw new NotImplementedException();
+           UserEntity r = new UserEntity();
+            r.Email = mail;
+            r.Pseudo = pseudo;
+            r.PssWd = pass;
+            
+
+            return true;
         }
+
+    
 
         public bool Delete(int id)
         {
