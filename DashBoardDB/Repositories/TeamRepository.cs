@@ -19,7 +19,12 @@ namespace DashBoardDAL.Repositories
 
             tm.Name = name;
             tm.TeamUsers = new List<UserEntity>();
-
+            using (DBConnect db = new DBConnect())
+            {
+                db.team.Add(tm);
+                db.SaveChanges();
+                return true;
+            }
             return true;
         }
         /// <summary>

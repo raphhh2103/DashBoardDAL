@@ -9,29 +9,65 @@ namespace DashBoardDAL.Repositories
 {
     internal class ProjectRepository : IRepository<ProjectEntity>
     {
-        public bool Create()
+        public bool Create(string nameProject)
         {
-            throw new NotImplementedException();
+            ProjectEntity p = new ProjectEntity();
+
+            p.NameProject = nameProject;
+            p.TeamsUsers = new List<UserEntity>();
+            using(DBConnect db= new DBConnect())
+            {
+                db.Project.Add(p);
+                db.SaveChanges();
+                return true;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (DBConnect db = new DBConnect())
+            {
+                var t = db.Project.Where(a => a.Id == id).FirstOrDefault();
+                if (t is ProjectEntity)
+                    db.Remove(t);
+            }
+            return true;
         }
 
         public IEnumerable<ProjectEntity> GetAll()
         {
-            throw new NotImplementedException();
+            List<ProjectEntity> entities = new List<ProjectEntity>();
+            using (DBConnect db = new DBConnect())
+            {
+                entities = db.Project.AsQueryable().ToList();
+            }
+            return entities;
         }
 
         public ProjectEntity GetOne(int id)
         {
-            throw new NotImplementedException();
+            ProjectEntity pj = new ProjectEntity();
+            using (DBConnect db = new DBConnect())
+            {
+                pj = db.Project.Where(p => p.Id == id).FirstOrDefault();
+
+            }
+            return pj;
         }
 
-        public bool Update(int id)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Update(ProjectEntity entity)
         {
-            throw new NotImplementedException();
+            using (DBConnect db = new DBConnect())
+            {
+                db.Project.Update(entity);
+                return true;
+            }
         }
     }
 }
