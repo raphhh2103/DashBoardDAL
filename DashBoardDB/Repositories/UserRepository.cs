@@ -9,37 +9,110 @@ namespace DashBoardDAL.Repositories
 {
     public class UserRepository : IRepository<UserEntity>
     {
-        public bool Create(string mail,string pseudo, string pass)
+        public bool Create(string mail, string pseudo, string pass)
         {
-           UserEntity r = new UserEntity();
+            UserEntity r = new UserEntity();
             r.Email = mail;
             r.Pseudo = pseudo;
             r.PssWd = pass;
-            
+            r.Teams = new List<TeamEntity>();
+            r.Boards = new List<BoardEntity>();
+            using (DBConnect db = new DBConnect())
+            {
+                db.User.Add(r);
+                db.SaveChanges();
+                return true;
+            }
+
+        }
+        /// <summary>
+        /// a modifier pour ne pas supprimer completement l'utilisateur ?
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            using (DBConnect db = new DBConnect())
+            {
+                var g = db.User.Where(x => x.Id == id).FirstOrDefault();
+
+                if (g is UserEntity)
+                    db.Remove(g);
+            }
 
             return true;
         }
 
-    
-
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<UserEntity> GetAll()
         {
-            throw new NotImplementedException();
+            List<UserEntity> r = new List<UserEntity>();
+            using(DBConnect db = new DBConnect())
+            {
+               r =  db.User.AsQueryable().ToList();
+            }
+            return r;
         }
 
         public UserEntity GetOne(int id)
         {
-            throw new NotImplementedException();
-        }
+            UserEntity t = new UserEntity();
+            using(DBConnect db = new DBConnect())
+            {
+                t = db.User.Where(a => a.Id == id).FirstOrDefault();
 
-        public bool Update(int id)
+               
+                    return t;
+            }
+                
+        }
+        /// <summary>
+        /// recherche les différencces entre le user envoyer en parametre  et le user en db avec le meme ID
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public bool Update(UserEntity entity)
         {
-            throw new NotImplementedException();
+            using (DBConnect db = new DBConnect())
+            {
+                var q = db.User.Where(y => y.Id == entity.Id).FirstOrDefault();
+
+                if (q is UserEntity)
+                {
+                    if (q.Email != entity.Email)
+                    {
+                        q.Email = entity.Email;
+                    }
+                    if (q.Pseudo != entity.Pseudo)
+                    {
+                        q.Pseudo = entity.Pseudo;
+                    }
+                    if (q.PssWd != entity.PssWd)
+                    {
+                        q.PssWd = entity.PssWd;
+                    }
+                    if (q.Teams != entity.Teams)
+                    {
+                        foreach (var item in entity.Teams)
+                        {
+                           q.Teams.ToList().Add(item);
+                        }
+                    }
+                    if (q.Boards != entity.Boards)
+                    {
+                        foreach (var item in entity.Boards)
+                        {
+                            q.Boards.ToList().Add(item);
+                        }   
+                    }
+                    //db.Add(q);
+                    db.SaveChanges();
+                    return true;
+                }
+
+            }
+            return false;
+
         }
     }
 }

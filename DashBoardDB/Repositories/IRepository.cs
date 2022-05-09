@@ -10,7 +10,7 @@ namespace DashBoardDAL.Repositories
     {
         bool Delete(int id);
 
-        bool Update(int id);
+        bool Update(T entity);
 
         //bool Create();
 
