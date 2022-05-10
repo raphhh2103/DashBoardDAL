@@ -69,8 +69,8 @@ namespace DashBoardDAL.Repositories
             {
                 m = db.team.Where(p => p.Id == id).FirstOrDefault();
 
-                return m;
             }
+                return m;
         }
         /// <summary>
         /// 
@@ -82,8 +82,8 @@ namespace DashBoardDAL.Repositories
             using(DBConnect db = new DBConnect())
             {
                 db.team.Update(entity);
-                return true;
             }
+                return true;
         }
     }
 }

@@ -9,29 +9,65 @@ namespace DashBoardDAL.Repositories
 {
     internal class BoardRepository : IRepository<BoardEntity>
     {
-        public bool Create()
+        public bool Create(string title, List<ContentEntity> content, UserEntity user)
         {
-            throw new NotImplementedException();
+            BoardEntity b = new BoardEntity();
+            b.Title = title;
+            b.Contents = new List<ContentEntity>();
+            b.UserOwner = user;
+            using (DBConnect db = new DBConnect())
+            {
+                db.Board.Add(b);
+                db.SaveChanges();
+
+            }
+            return true;
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (DBConnect db = new DBConnect())
+            {
+
+                BoardEntity g = db.Board.Where(d => d.Id == id).FirstOrDefault();
+                if (g is BoardEntity)
+                    db.Remove(g);
+
+            }
+            return true;
         }
 
         public IEnumerable<BoardEntity> GetAll()
         {
-            throw new NotImplementedException();
+            List<BoardEntity> c = new List<BoardEntity>();
+            using (DBConnect db = new DBConnect())
+            {
+                c = db.Board.AsQueryable().ToList();
+            }
+
+            return c;
         }
 
         public BoardEntity GetOne(int id)
         {
-            throw new NotImplementedException();
+            BoardEntity b = new BoardEntity();
+            using(DBConnect db = new DBConnect())
+            {
+                b = db.Board.Where(d => d.Id == id).FirstOrDefault();
+
+            }
+            return b;
         }
 
-        public bool Update(int id)
+
+
+        public bool Update(BoardEntity entity)
         {
-            throw new NotImplementedException();
+            using(DBConnect db = new DBConnect())
+            {
+                db.Board.Update(entity);
+            }
+                return true;
         }
     }
 }
