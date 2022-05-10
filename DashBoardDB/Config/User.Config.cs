@@ -24,6 +24,7 @@ namespace DashBoardDAL.Config
             builder.Property(t=> t.Pseudo).HasMaxLength(50).IsRequired();
             builder.Property(t=>t.Email).HasMaxLength(254).IsRequired();
             builder.Property(t => t.PssWd).IsRequired();
+            builder.Property(t => t.Salt).IsRequired();
 
             //contraintes
 

@@ -15,6 +15,9 @@ namespace DashBoardDAL.Entities
         public string Email { get; set; }
 
         public string PssWd { get; set; }
+        // a deplacer ! 
+        public string Salt { get; set; }
+
 
         public IEnumerable<BoardEntity> Boards { get; set; }
 
