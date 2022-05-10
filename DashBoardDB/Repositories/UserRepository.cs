@@ -16,12 +16,13 @@ namespace DashBoardDAL.Repositories
         /// <param name="pseudo"></param>
         /// <param name="pass"></param>
         /// <returns></returns>
-        public bool Create(string mail, string pseudo, string pass)
+        public bool Create(string mail, string pseudo, string pass,string salt)
         {
             UserEntity r = new UserEntity();
             r.Email = mail;
             r.Pseudo = pseudo;
             r.PssWd = pass;
+            r.Salt = salt;
             r.Teams = new List<TeamEntity>();
             r.Boards = new List<BoardEntity>();
             using (DBConnect db = new DBConnect())
