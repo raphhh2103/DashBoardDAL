@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardDAL.Repositories
 {
-    internal class ProjectRepository : IRepository<ProjectEntity>
+    public class ProjectRepository : IRepository<ProjectEntity>
     {
         public bool Create(string nameProject)
         {

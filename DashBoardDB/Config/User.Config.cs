@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardDAL.Config
 {
-    internal class UserEntityConfig : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<UserEntity>
+    public class UserEntityConfig : Microsoft.EntityFrameworkCore.IEntityTypeConfiguration<UserEntity>
     {
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {

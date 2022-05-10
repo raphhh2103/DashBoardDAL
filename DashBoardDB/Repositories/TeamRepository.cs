@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardDAL.Repositories
 {
-    internal class TeamRepository : IRepository<TeamEntity>
+    public class TeamRepository : IRepository<TeamEntity>
     {
         /// <summary>
         /// 

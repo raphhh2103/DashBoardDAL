@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardDAL.Repositories
 {
-    internal class ContentRepository : IRepository<ContentEntity>
+    public class ContentRepository : IRepository<ContentEntity>
     {
         /// <summary>
         /// 

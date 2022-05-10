@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DashBoardDAL.Repositories
 {
-    internal interface IRepository<T>
+    public interface IRepository<T>
     {
         bool Delete(int id);
 
